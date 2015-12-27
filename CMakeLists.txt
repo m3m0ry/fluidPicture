@@ -1,0 +1,39 @@
+cmake_minimum_required(VERSION 2.8.11)
+PROJECT(fluidPicture)
+LIST(APPEND CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+
+SET(PROJ_NAME)
+
+FILE(GLOB SRC_FILES "./*.cpp")
+
+#Things for Qt5
+#set (CMAKE_PREFIX_PATH /opt/Qt5.3.2/5.3/gcc)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+FIND_PACKAGE(Qt5Widgets REQUIRED)
+FIND_PACKAGE(Qt5Core REQUIRED)
+FIND_PACKAGE(Qt5Gui REQUIRED)
+
+QT5_WRAP_UI(UIS_HDRS
+	mainwindow.ui
+)
+
+LINK_DIRECTORIES(
+	./
+	)
+
+ADD_EXECUTABLE(
+		${PROJECT_NAME} 
+		${SRC_FILES}
+		${UIS_HDRS}
+	)
+  
+
+TARGET_LINK_LIBRARIES(
+		${PROJECT_NAME}
+		Qt5::Widgets
+		Qt5::Core
+		Qt5::Gui
+	)
+
