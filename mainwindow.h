@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 #include <QImage>
@@ -8,6 +7,8 @@
 #include <QMessageBox>
 #include <QGraphicsScene>
 #include <QPixmap>
+
+#include "picturemodel.h"
 
 
 namespace Ui {
@@ -23,13 +24,30 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_actionOpen_triggered();
+    void open();
+
+    bool saveAs();
+
+    void save();
+
+    void exit();
+
+    bool ifAllowedSaveAs();
+
+    void on_pushButtonAir_clicked();
+
+    void on_pushButtonObstacle_clicked();
+
+    void on_pushButtonFluid_clicked();
+
+    void newPicture();
+
+    void resizePicture();
 
 private:
     Ui::MainWindow *ui;
-    QImage image_;
+    QImage *image_;
     QGraphicsScene *scene_;
-    QPixmap pixmap_;
+    QString openedFile_;
+    PictureModel *model_;
 };
-
-#endif // MAINWINDOW_H
